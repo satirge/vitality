@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vitality Club — Le café augmenté lancé en Suisse romande</title>
+  <meta name="description" content="Votre vrai café du matin, enrichi à 10% de champignons adaptogènes. Une énergie plus stable, sans crash. Premier café augmenté en Suisse romande — CHF 140/mois.">
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root {
+      /* Palette — tons naturels, terreux, premium */
+      --c-primary:    #2C4A2E;   /* vert forêt profond */
+      --c-primary-lt: #3D6B40;
+      --c-accent:     #C8973A;   /* or chaud / café */
+      --c-accent-lt:  #E8B86D;
+      --c-bg:         #FAF7F2;   /* crème chaud */
+      --c-bg-alt:     #F0EBE1;
+      --c-bg-dark:    #1E2E1F;
+      --c-text:       #1A1A1A;
+      --c-text-muted: #5A5A5A;
+      --c-white:      #FFFFFF;
+      --c-border:     #DDD5C8;
+
+      /* Espacement */
+      --sp-1:  4px;  --sp-2:  8px;  --sp-3: 16px;
+      --sp-4: 24px;  --sp-5: 40px;  --sp-6: 64px;
+      --sp-7: 96px;
+
+      /* Typographie */
+      --font: -apple-system, "Segoe UI", Inter, Roboto, sans-serif;
+      --h1: clamp(2.2rem, 5vw, 3.8rem);
+      --h2: clamp(1.7rem, 3.5vw, 2.6rem);
+      --h3: clamp(1.2rem, 2vw, 1.5rem);
+      --body: 1.05rem;
+
+      /* Effets */
+      --radius-sm: 8px;
+      --radius:    16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,.07);
+      --shadow-md: 0 6px 24px rgba(0,0,0,.10);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,.14);
+      --transition: .25s ease;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      font-size: var(--body);
+      background: var(--c-bg);
+      color: var(--c-text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ============================================================
+       UTILITIES
+    ============================================================ */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 var(--sp-4);
+    }
+    .container--narrow { max-width: 720px; }
+    .text-center { text-align: center; }
+    .eyebrow {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      margin-bottom: var(--sp-3);
+    }
+    .section { padding: var(--sp-7) 0; }
+    .section--alt { background: var(--c-bg-alt); }
+    .section--dark {
+      background: var(--c-bg-dark);
+      color: var(--c-white);
+    }
+
+    /* Reveal au scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* Bouton principal */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      background: var(--c-accent);
+      color: var(--c-white);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 36px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(200,151,58,.35);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      text-align: center;
+    }
+    .btn:hover {
+      background: var(--c-accent-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(200,151,58,.45);
+    }
+    .btn--outline {
+      background: transparent;
+      border: 2px solid var(--c-accent);
+      color: var(--c-accent);
+      box-shadow: none;
+    }
+    .btn--outline:hover {
+      background: var(--c-accent);
+      color: var(--c-white);
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(200,151,58,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 10% 80%, rgba(44,74,46,.15) 0%, transparent 55%),
+        linear-gradient(160deg, #1E2E1F 0%, #2C3D1E 45%, #1A2A1B 100%);
+      color: var(--c-white);
+      position: relative;
+      overflow: hidden;
+      padding: var(--sp-6) 0;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-6);
+      align-items: center;
+    }
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      background: rgba(200,151,58,.2);
+      border: 1px solid rgba(200,151,58,.4);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--c-accent-lt);
+      margin-bottom: var(--sp-3);
+    }
+    .hero__title {
+      font-size: var(--h1);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.03em;
+      margin-bottom: var(--sp-4);
+    }
+    .hero__title em {
+      font-style: normal;
+      color: var(--c-accent-lt);
+    }
+    .hero__sub {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,.78);
+      line-height: 1.65;
+      margin-bottom: var(--sp-5);
+      max-width: 480px;
+    }
+    .hero__cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      align-items: flex-start;
+    }
+    .hero__micro {
+      font-size: .82rem;
+      color: rgba(255,255,255,.55);
+      margin-top: var(--sp-1);
+    }
+    .hero__visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero__product-mock {
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 4/5;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-3);
+      padding: var(--sp-5);
+      backdrop-filter: blur(8px);
+    }
+    .product-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--c-accent), var(--c-accent-lt));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero__product-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .hero__product-desc {
+      font-size: .9rem;
+      color: rgba(255,255,255,.65);
+      text-align: center;
+      line-height: 1.55;
+    }
+    .hero__product-pill {
+      background: rgba(200,151,58,.25);
+      border: 1px solid rgba(200,151,58,.5);
+      color: var(--c-accent-lt);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+    }
+
+    /* ============================================================
+       RÉASSURANCE
+    ============================================================ */
+    .reassurance {
+      background: var(--c-primary);
+      color: var(--c-white);
+      padding: var(--sp-4) 0;
+    }
+    .reassurance__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--sp-3);
+      text-align: center;
+    }
+    .reassurance__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-1);
+    }
+    .reassurance__icon { font-size: 1.4rem; }
+    .reassurance__label {
+      font-size: .82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.85);
+    }
+
+    /* ============================================================
+       PROBLÈME
+    ============================================================ */
+    .problem__lead {
+      font-size: clamp(1.15rem, 2vw, 1.35rem);
+      line-height: 1.75;
+      color: var(--c-text-muted);
+      margin-bottom: var(--sp-5);
+    }
+    .problem__lead strong { color: var(--c-text); }
+    .problem__hooks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--sp-3);
+      margin-top: var(--sp-5);
+    }
+    .problem__hook {
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--sp-4);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .problem__hook:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .problem__hook-icon {
+      font-size: 1.6rem;
+      margin-bottom: var(--sp-2);
+    }
+    .problem__hook h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: var(--sp-1);
+    }
+    .problem__hook p {
+      font-size: .88rem;
+      color: var(--c-text-muted);
+      line-height: 1.55;
+    }
+
+    /* ============================================================
+       MÉCANISME
+    ============================================================ */
+    .mechanism__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-6);
+      align-items: center;
+    }
+    .mechanism__visual {
+      background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-lt) 100%);
+      border-radius: var(--radius-lg);
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-4);
+      color: var(--c-white);
+      padding: var(--sp-5);
+    }
+    .mechanism__pct {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -.04em;
+      color: var(--c-accent-lt);
+      line-height: 1;
+    }
+    .mechanism__pct-label {
+      font-size: .95rem;
+      color: rgba(255,255,255,.75);
+      text-align: center;
+      line-height: 1.5;
+    }
+    .mechanism__steps { display: flex; flex-direction: column; gap: var(--sp-4); }
+    .mechanism__step {
+      display: flex;
+      gap: var(--sp-3);
+      align-items: flex-start;
+    }
+    .mechanism__num {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      background: var(--c-accent);
+      color: var(--c-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: .95rem;
+    }
+    .mechanism__step-text h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .mechanism__step-text p {
+      font-size: .9rem;
+      color: var(--c-text-muted);
+      line-height: 1.55;
+    }
+
+    /* ============================================================
+       BÉNÉFICES
+    ============================================================ */
+    .benefits__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-4);
+    }
+    .benefit-card {
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--sp-5) var(--sp-4);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .benefit-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+    .benefit-card__icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(44,74,46,.1), rgba(44,74,46,.2));
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: var(--sp-3);
+    }
+    .benefit-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: var(--sp-2);
+    }
+    .benefit-card p {
+      font-size: .9rem;
+      color: var(--c-text-muted);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       PREUVE SOCIALE
+    ============================================================ */
+    .social__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-4);
+      margin-bottom: var(--sp-6);
+    }
+    .review-card {
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--sp-4);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .review-card__stars { color: var(--c-accent); font-size: 1.1rem; margin-bottom: var(--sp-2); }
+    .review-card__text {
+      font-size: .92rem;
+      line-height: 1.65;
+      color: var(--c-text);
+      font-style: italic;
+      margin-bottom: var(--sp-3);
+    }
+    .review-card__author {
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--c-text-muted);
+    }
+    .media-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+      opacity: .6;
+    }
+    .media-logo {
+      background: var(--c-border);
+      border-radius: var(--radius-sm);
+      padding: var(--sp-2) var(--sp-4);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      color: var(--c-text-muted);
+    }
+
+    /* ============================================================
+       OFFRE
+    ============================================================ */
+    .offer__cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+      margin-bottom: var(--sp-5);
+    }
+    .offer-card {
+      background: var(--c-white);
+      border: 2px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      position: relative;
+    }
+    .offer-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--c-accent);
+    }
+    .offer-card--featured {
+      border-color: var(--c-accent);
+      box-shadow: var(--shadow-md);
+    }
+    .offer-card__badge {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--c-accent);
+      color: var(--c-white);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 18px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+    .offer-card__name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: var(--sp-2);
+    }
+    .offer-card__tagline {
+      font-size: .9rem;
+      color: var(--c-text-muted);
+      margin-bottom: var(--sp-4);
+      line-height: 1.5;
+    }
+    .offer-card__features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      margin-bottom: var(--sp-5);
+    }
+    .offer-card__features li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-2);
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+    .offer-card__features li::before {
+      content: "✓";
+      color: var(--c-primary);
+      font-weight: 800;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+    .offer-card__price {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      color: var(--c-primary);
+    }
+    .offer-card__price span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--c-text-muted);
+    }
+    .offer__bonus {
+      background: linear-gradient(135deg, var(--c-primary), var(--c-primary-lt));
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      color: var(--c-white);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+    }
+    .offer__bonus-icon {
+      font-size: 3rem;
+      flex-shrink: 0;
+    }
+    .offer__bonus h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: var(--sp-2);
+    }
+    .offer__bonus p {
+      font-size: .92rem;
+      color: rgba(255,255,255,.8);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       GARANTIE
+    ============================================================ */
+    .guarantee {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-4);
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      box-shadow: var(--shadow-sm);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .guarantee__icon { font-size: 2.8rem; flex-shrink: 0; }
+    .guarantee h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: var(--sp-2); }
+    .guarantee p { font-size: .92rem; color: var(--c-text-muted); line-height: 1.65; }
+
+    /* ============================================================
+       FAQ
+    ============================================================ */
+    .faq__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .faq__item {
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .faq__q {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--sp-3);
+      padding: var(--sp-4);
+      background: none;
+      border: none;
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--c-text);
+      cursor: pointer;
+      text-align: left;
+    }
+    .faq__q:hover { background: var(--c-bg-alt); }
+    .faq__chevron {
+      flex-shrink: 0;
+      transition: transform var(--transition);
+    }
+    .faq__item.open .faq__chevron { transform: rotate(180deg); }
+    .faq__a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease, padding .3s ease;
+      padding: 0 var(--sp-4);
+      font-size: .92rem;
+      color: var(--c-text-muted);
+      line-height: 1.7;
+    }
+    .faq__item.open .faq__a {
+      max-height: 300px;
+      padding: 0 var(--sp-4) var(--sp-4);
+    }
+
+    /* ============================================================
+       CTA FINAL
+    ============================================================ */
+    .cta-final {
+      background: linear-gradient(160deg, #1A2C1B 0%, #2C4A2E 50%, #1E3A20 100%);
+      color: var(--c-white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-final::before {
+      content: "";
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(ellipse at center, rgba(200,151,58,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-final__inner { position: relative; }
+    .cta-final h2 {
+      font-size: var(--h2);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin-bottom: var(--sp-3);
+    }
+    .cta-final h2 em {
+      font-style: normal;
+      color: var(--c-accent-lt);
+    }
+    .cta-final p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.75);
+      margin-bottom: var(--sp-5);
+      line-height: 1.65;
+    }
+    .cta-final__micro {
+      font-size: .82rem;
+      color: rgba(255,255,255,.45);
+      margin-top: var(--sp-3);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,.45);
+      padding: var(--sp-5) 0;
+      text-align: center;
+    }
+    footer a { color: rgba(255,255,255,.6); text-decoration: underline; }
+    footer a:hover { color: var(--c-accent-lt); }
+    .footer__sig {
+      font-size: .78rem;
+      margin-top: var(--sp-3);
+      padding-top: var(--sp-3);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    /* ============================================================
+       CTA STICKY MOBILE
+    ============================================================ */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--c-primary);
+      padding: var(--sp-3) var(--sp-4);
+      box-shadow: 0 -4px 20px rgba(0,0,0,.2);
+      z-index: 999;
+    }
+    .sticky-cta a {
+      display: block;
+      background: var(--c-accent);
+      color: var(--c-white);
+      font-weight: 700;
+      font-size: .95rem;
+      text-align: center;
+      padding: 14px;
+      border-radius: 50px;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      .hero__inner { grid-template-columns: 1fr; }
+      .hero__visual { display: none; }
+      .hero { min-height: auto; padding: var(--sp-6) 0 calc(var(--sp-6) + 70px); }
+      .reassurance__grid { grid-template-columns: repeat(2, 1fr); }
+      .mechanism__grid { grid-template-columns: 1fr; }
+      .mechanism__visual { aspect-ratio: 2/1; }
+      .benefits__grid { grid-template-columns: 1fr; }
+      .social__grid { grid-template-columns: 1fr; }
+      .offer__cards { grid-template-columns: 1fr; }
+      .offer__bonus { flex-direction: column; text-align: center; }
+      .guarantee { flex-direction: column; text-align: center; }
+      .sticky-cta { display: block; }
+      .section { padding: var(--sp-6) 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Nouveau · Lancement Suisse romande
+        </div>
+        <h1 class="hero__title">
+          Ton café du matin.<br>
+          <em>Maintenant, il travaille pour toi.</em>
+        </h1>
+        <p class="hero__sub">
+          Le même vrai café que tu aimes — enrichi à 10% de champignons adaptogènes pour une énergie stable, sans crash en milieu de journée. Premier café augmenté lancé en Suisse romande.
+        </p>
+        <div class="hero__cta-group">
+          <a href="[LIEN_ACHAT]" class="btn">
+            Commencer mon rituel — CHF 140/mois
+          </a>
+          <p class="hero__micro">✓ Sans engagement &nbsp;·&nbsp; ✓ Guide Énergie offert &nbsp;·&nbsp; ✓ Livraison Suisse</p>
+        </div>
+      </div>
+      <div class="hero__visual reveal">
+        <div class="hero__product-mock">
+          <div class="product-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+          </div>
+          <div class="hero__product-pill">Lion's Roast</div>
+          <p class="hero__product-name">Café + Champignons Adaptogènes</p>
+          <p class="hero__product-desc">Vrai café arabica premium<br>+ 10% extrait de champignons<br>Lion's Mane · Chaga · Reishi</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     RÉASSURANCE
+============================================================ -->
+<div class="reassurance">
+  <div class="container">
+    <div class="reassurance__grid">
+      <div class="reassurance__item reveal">
+        <span class="reassurance__icon">🌿</span>
+        <span class="reassurance__label">100% naturel, sans additifs</span>
+      </div>
+      <div class="reassurance__item reveal">
+        <span class="reassurance__icon">📖</span>
+        <span class="reassurance__label">Guide Énergie offert</span>
+      </div>
+      <div class="reassurance__item reveal">
+        <span class="reassurance__icon">🔄</span>
+        <span class="reassurance__label">Résiliable à tout moment</span>
+      </div>
+      <div class="reassurance__item reveal">
+        <span class="reassurance__icon">🇨🇭</span>
+        <span class="reassurance__label">Livraison Suisse romande</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROBLÈME
+============================================================ -->
+<section class="section">
+  <div class="container container--narrow">
+    <div class="text-center reveal">
+      <span class="eyebrow">Le vrai problème</span>
+      <h2 style="font-size: var(--h2); font-weight: 800; letter-spacing: -.02em; margin-bottom: var(--sp-4);">
+        Ce n'est pas un manque de volonté.<br>C'est ton café.
+      </h2>
+    </div>
+    <p class="problem__lead reveal">
+      Tu te lèves, tu bois ton café. <strong>Ça marche une heure.</strong> Puis la chute arrive. Coup de fatigue à 15h, deuxième café, et le soir tu es épuisé(e) mais incapable de vraiment décrocher. Ce cycle, tu le connais par cœur.
+      <br><br>
+      Ce n'est pas normal. Ce n'est pas ton âge. C'est la <strong>caféine isolée</strong> qui joue avec ton cortisol — un pic, un crash, une dépendance silencieuse qui s'installe depuis des années.
+    </p>
+    <div class="problem__hooks">
+      <div class="problem__hook reveal">
+        <div class="problem__hook-icon">😮‍💨</div>
+        <h4>L'énergie en dents de scie</h4>
+        <p>Pic le matin, crash l'après-midi. Tu vis au rythme de tes cafés, pas de ta vraie énergie.</p>
+      </div>
+      <div class="problem__hook reveal">
+        <div class="problem__hook-icon">🧠</div>
+        <h4>Le brouillard mental</h4>
+        <p>Concentré(e) par intermittence. Les idées claires le matin, ça ne dure pas au-delà de 11h.</p>
+      </div>
+      <div class="problem__hook reveal">
+        <div class="problem__hook-icon">😤</div>
+        <h4>La dépendance silencieuse</h4>
+        <p>Rater ton café du matin = journée foutue. Tu le sais, tu ne l'aimes pas — mais tu continues.</p>
+      </div>
+      <div class="problem__hook reveal">
+        <div class="problem__hook-icon">💊</div>
+        <h4>Les solutions qui ne tiennent pas</h4>
+        <p>Magnésium, vitamines, boisson énergisante… Rien ne s'installe vraiment. Parce que la source du problème n'a pas changé.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MÉCANISME
+============================================================ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom: var(--sp-6);">
+      <span class="eyebrow">Le mécanisme</span>
+      <h2 style="font-size: var(--h2); font-weight: 800; letter-spacing: -.02em;">
+        Ton café. Exactement pareil.<br>Juste augmenté.
+      </h2>
+    </div>
+    <div class="mechanism__grid">
+      <div class="mechanism__visual reveal">
+        <div class="mechanism__pct">10%</div>
+        <p class="mechanism__pct-label">de champignons adaptogènes<br>dans chaque dose de vrai café</p>
+        <svg width="48" height="2" viewBox="0 0 48 2"><rect width="48" height="2" fill="rgba(255,255,255,.2)"/></svg>
+        <p style="font-size: .85rem; color: rgba(255,255,255,.6); text-align: center;">Lion's Mane · Chaga · Reishi<br>[Image produit à ajouter]</p>
+      </div>
+      <div class="mechanism__steps">
+        <div class="mechanism__step reveal">
+          <div class="mechanism__num">1</div>
+          <div class="mechanism__step-text">
+            <h4>C'est du vrai café</h4>
+            <p>Arabica sélectionné, torréfaction soignée. Le goût que tu connais, le rituel que tu aimes. Pas un substitut, pas une poudre verte. Ton café.</p>
+          </div>
+        </div>
+        <div class="mechanism__step reveal">
+          <div class="mechanism__num">2</div>
+          <div class="mechanism__step-text">
+            <h4>+10% d'adaptogènes dans chaque tasse</h4>
+            <p>Lion's Mane pour la clarté mentale. Chaga pour l'énergie de fond. Reishi pour réduire le stress oxydatif. Dosés pour agir, pas pour faire joli sur l'étiquette.</p>
+          </div>
+        </div>
+        <div class="mechanism__step reveal">
+          <div class="mechanism__num">3</div>
+          <div class="mechanism__step-text">
+            <h4>Une énergie qui s'installe dans le temps</h4>
+            <p>Les adaptogènes ne créent pas de dépendance. Ils régulent. Dès la 2e semaine, ton énergie se stabilise. Tu arrêtes de vivre au rythme des pics et des crashes.</p>
+          </div>
+        </div>
+        <div class="mechanism__step reveal">
+          <div class="mechanism__num">4</div>
+          <div class="mechanism__step-text">
+            <h4>Zéro changement dans ta routine</h4>
+            <p>Tu prépares ton café exactement comme avant. Pas de gélules, pas de protocole compliqué. Un rituel, pas une contrainte.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BÉNÉFICES
+============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom: var(--sp-6);">
+      <span class="eyebrow">Ce que tu ressens</span>
+      <h2 style="font-size: var(--h2); font-weight: 800; letter-spacing: -.02em;">
+        La différence en quelques semaines
+      </h2>
+    </div>
+    <div class="benefits__grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-card__icon">⚡</div>
+        <h3>Énergie stable jusqu'au soir</h3>
+        <p>Fini le crash à 15h. Ton niveau d'énergie se lisse sur la journée — sans pic artificiel ni chute brutale.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-card__icon">🎯</div>
+        <h3>Clarté mentale sans agitation</h3>
+        <p>Tu te concentres mieux, plus longtemps, sans le stress nerveux de la caféine pure. Tu penses, tu ne vibres pas.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-card__icon">☕</div>
+        <h3>Le même rituel, amélioré</h3>
+        <p>Tu changes de café, pas de vie. Même geste, même goût, même moment. Juste des effets qui durent.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-card__icon">📈</div>
+        <h3>Des effets qui s'accumulent</h3>
+        <p>Contrairement à la caféine, les adaptogènes agissent de façon cumulative. Plus tu continues, plus l'effet est marqué.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-card__icon">🛡️</div>
+        <h3>Moins de dépendance</h3>
+        <p>Tu peux rater une journée sans que ta tête explose. Le Lion's Mane et le Chaga ne créent pas d'accoutumance.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-card__icon">🌙</div>
+        <h3>Tu récupères mieux</h3>
+        <p>Le Reishi soutient la qualité du sommeil. Mieux récupéré(e) le soir, mieux armé(e) le lendemain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PREUVE SOCIALE
+============================================================ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom: var(--sp-6);">
+      <span class="eyebrow">Ce qu'ils disent</span>
+      <h2 style="font-size: var(--h2); font-weight: 800; letter-spacing: -.02em;">
+        Les premiers abonnés témoignent
+      </h2>
+    </div>
+    <div class="social__grid">
+      <div class="review-card reveal">
+        <div class="review-card__stars">★★★★★</div>
+        <p class="review-card__text">« Je suis plus calme et plus efficace — et ça fait plusieurs mois que ça tient. Je ne reviendrais pas à un café normal. »</p>
+        <p class="review-card__author">Marie S. — Lausanne</p>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-card__stars">★★★★★</div>
+        <p class="review-card__text">« Ce que j'apprécie c'est que ça s'installe doucement, sans dépendance. Je le sens si je rate une journée — mais positivement. »</p>
+        <p class="review-card__author">Blanche R. — Genève</p>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-card__stars">★★★★★</div>
+        <p class="review-card__text">« J'étais sceptique sur les champignons dans mon café. Maintenant je recommande autour de moi. Le goût est vraiment bon. »</p>
+        <p class="review-card__author">Guénin V. — Fribourg</p>
+      </div>
+    </div>
+    <div class="media-logos reveal">
+      <span class="media-logo">SANTÉ MAGAZINE</span>
+      <span class="media-logo">DR. GOOD</span>
+      <span class="media-logo">YOGA</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OFFRE
+============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom: var(--sp-6);">
+      <span class="eyebrow">L'offre</span>
+      <h2 style="font-size: var(--h2); font-weight: 800; letter-spacing: -.02em;">
+        Choisis ton programme
+      </h2>
+      <p style="color: var(--c-text-muted); margin-top: var(--sp-3);">Les deux peuvent être combinés pour un effet maximal.</p>
+    </div>
+    <div class="offer__cards">
+      <div class="offer-card offer-card--featured reveal">
+        <div class="offer-card__badge">⭐ Le plus populaire</div>
+        <p class="offer-card__name">Lion's Roast</p>
+        <p class="offer-card__tagline">Ton café du matin augmenté — arabica premium + Lion's Mane + Chaga. Le point d'entrée parfait.</p>
+        <ul class="offer-card__features">
+          <li>Vrai café arabica sélectionné</li>
+          <li>10% extrait Lion's Mane (clarté mentale)</li>
+          <li>10% extrait Chaga (énergie de fond)</li>
+          <li>Livraison mensuelle automatique</li>
+          <li>Guide "Mon Manuel Énergie" offert</li>
+          <li>Résiliable à tout moment</li>
+        </ul>
+        <p class="offer-card__price">CHF 140 <span>/ mois</span></p>
+        <a href="[LIEN_ACHAT]" class="btn" style="margin-top: var(--sp-4); width: 100%; justify-content: center;">
+          Démarrer avec Lion's Roast
+        </a>
+      </div>
+      <div class="offer-card reveal">
+        <p class="offer-card__name">Mycoboost</p>
+        <p class="offer-card__tagline">Le booster adaptogène sans caféine — pour ceux qui veulent aller plus loin ou ne boivent pas de café.</p>
+        <ul class="offer-card__features">
+          <li>Complexe Reishi + Cordyceps + champignons fonctionnels</li>
+          <li>Sans caféine — idéal en complément de Lion's Roast</li>
+          <li>Soutien du sommeil et récupération</li>
+          <li>Livraison mensuelle automatique</li>
+          <li>Guide "Mon Manuel Énergie" offert</li>
+          <li>Résiliable à tout moment</li>
+        </ul>
+        <p class="offer-card__price">CHF 140 <span>/ mois</span></p>
+        <a href="[LIEN_ACHAT]" class="btn btn--outline" style="margin-top: var(--sp-4); width: 100%; justify-content: center;">
+          Démarrer avec Mycoboost
+        </a>
+      </div>
+    </div>
+    <div class="offer__bonus reveal">
+      <div class="offer__bonus-icon">📖</div>
+      <div>
+        <h3>Votre guide offert avec chaque programme</h3>
+        <p>"Mon Manuel Énergie" — les habitudes, les associations gagnantes et les protocoles pour maximiser les effets des adaptogènes au quotidien. Inclus dès le premier envoi, sans supplément.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GARANTIE
+============================================================ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="guarantee reveal">
+      <div class="guarantee__icon">🛡️</div>
+      <div>
+        <h3>Pas convaincu(e) après le premier mois ?</h3>
+        <p>Contactez-nous. On en discute — sans formulaire kafkaïen, sans conditions en petits caractères. Si ça ne vous convient pas, on trouve une solution. Votre satisfaction est notre seul indicateur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom: var(--sp-6);">
+      <span class="eyebrow">Questions fréquentes</span>
+      <h2 style="font-size: var(--h2); font-weight: 800; letter-spacing: -.02em;">
+        Ce que vous voulez savoir avant de commencer
+      </h2>
+    </div>
+    <div class="faq__list">
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false">
+          Est-ce que ça ressemble à un vrai café ?
+          <svg class="faq__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq__a">Oui. Lion's Roast est un vrai café arabica sélectionné — torréfaction soignée, arômes intacts. Les champignons sont intégrés à 10% et ne modifient pas sensiblement le goût. La plupart des abonnés ne font pas de différence à l'aveugle. C'est bien pour ça que ça s'appelle "augmenté", pas "remplacé".</div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false">
+          En combien de temps on ressent les effets ?
+          <svg class="faq__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq__a">Les adaptogènes agissent de façon cumulative — ce ne sont pas des stimulants immédiats. La majorité des abonnés rapportent une énergie plus stable à partir de la 2e semaine. L'effet complet s'installe sur 4 à 6 semaines de consommation régulière. Les effets varient selon les personnes.</div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false">
+          CHF 140/mois, c'est beaucoup. Pourquoi ce prix ?
+          <svg class="faq__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq__a">Ramenez ça à CHF 4,60/jour — soit le prix d'un café en terrasse. La différence : celui-là travaille pour vous 24h/24. Les extraits de champignons fonctionnels de qualité (et en dosage efficace) ont un coût réel. On ne met pas du Lion's Mane en trace pour faire joli sur l'étiquette.</div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false">
+          Quelle est la différence entre Lion's Roast et Mycoboost ?
+          <svg class="faq__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq__a">Lion's Roast est votre café du matin enrichi — il remplace votre café habituel. Mycoboost est un complément adaptogène sans caféine, à base de Reishi, Cordyceps et autres champignons fonctionnels. Ils peuvent être utilisés ensemble pour un effet synergique, ou séparément selon vos préférences.</div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false">
+          Je peux arrêter quand je veux ?
+          <svg class="faq__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor", stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq__a">Oui. Aucun engagement minimum. Résiliation en 1 clic depuis votre espace client, sans délai de préavis. Vous pouvez aussi mettre en pause si vous partez en vacances.</div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q" aria-expanded="false">
+          C'est sûr ? Des contre-indications ?
+          <svg class="faq__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq__a">Les champignons adaptogènes utilisés (Lion's Mane, Chaga, Reishi, Cordyceps) sont naturels et sans additifs. En cas de traitement médical ou d'allergie aux champignons, consultez votre médecin avant de commencer. Comme tout complément, déconseillé pendant la grossesse sans avis médical.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA FINAL
+============================================================ -->
+<section class="section cta-final">
+  <div class="container cta-final__inner text-center">
+    <div class="reveal">
+      <span class="eyebrow" style="color: var(--c-accent-lt);">Prêt(e) à commencer ?</span>
+      <h2>Ton café du matin mérite<br>de <em>vraiment travailler pour toi</em>.</h2>
+      <p>Rejoins les premiers abonnés Vitality Club en Suisse romande.<br>Guide Énergie offert · Livraison incluse · Sans engagement.</p>
+      <a href="[LIEN_ACHAT]" class="btn" style="font-size: 1.1rem; padding: 18px 44px;">
+        Démarrer mon rituel — CHF 140/mois
+      </a>
+      <p class="cta-final__micro">✓ Sans engagement &nbsp;·&nbsp; ✓ Résiliable en 1 clic &nbsp;·&nbsp; ✓ Livraison Suisse romande</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <p>© 2026 Vitality Club — EDI Group, Suisse romande</p>
+    <p style="margin-top: var(--sp-2); font-size: .8rem;">
+      Les compléments alimentaires ne se substituent pas à une alimentation variée et équilibrée.<br>
+      Résultats variables selon les personnes. Consultez un médecin en cas de doute.
+    </p>
+    <p class="footer__sig">
+      ⚡ Page générée avec la Méthode Océan Vert — <a href="https://www.boostconversion.fr/rendez-vous?utm_source=skill-generate-lp" target="_blank" rel="noopener">Boost Conversion</a>
+    </p>
+  </div>
+</footer>
+
+<!-- CTA STICKY MOBILE -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="[LIEN_ACHAT]">Commencer mon rituel — CHF 140/mois</a>
+</div>
+
+<!-- ============================================================
+     JS — Reveal + FAQ + Sticky CTA
+============================================================ -->
+<script>
+  // Reveal au scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq__q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq__item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq__item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+      btn.setAttribute('aria-expanded', !isOpen);
+    });
+  });
+
+  // Sticky CTA : masqué quand le hero est visible
+  const hero = document.querySelector('.hero');
+  const stickyCta = document.getElementById('stickyCta');
+  const heroObserver = new IntersectionObserver((entries) => {
+    stickyCta.style.opacity = entries[0].isIntersecting ? '0' : '1';
+    stickyCta.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+  }, { threshold: 0.1 });
+  heroObserver.observe(hero);
+</script>
+
+</body>
+</html>
